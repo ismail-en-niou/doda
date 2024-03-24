@@ -1,5 +1,6 @@
-const { initializeApp } = require("firebase/app");
-const { getAnalytics } = require("firebase/analytics");
+
+// Import bcrypt for password hashing
+const bcrypt = require('bcrypt');
 const express = require("express");
 
 const firebaseConfig = {
@@ -13,16 +14,40 @@ const firebaseConfig = {
   measurementId: "G-VS4P08TY15"
 };
 
-const app = initializeApp(firebaseConfig);
-const appe = express();
 
-appe.use(express.json());
+const expressApp = express();
+expressApp.use(express.json());
 
-appe.get("/home", (req, res) => {
-    res.send("your are in about page ")
-})
+// Create a database array to store users temporarily (replace with Firebase later)
+const users = [];
+
+// Endpoint to handle user registration
+expressApp.post("/register", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        
+        // Check if user already exists
+        const existingUser = users.find((user) => user.email === email);
+        if (existingUser) {
+            return res.status(400).send("User already exists");
+        }
+        
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        
+        // Save user data to the database (replace with Firebase)
+        users.push({ email, password: hashedPassword });
+        
+        // Respond with success message
+        res.status(201).send("User registered successfully");
+    } catch (error) {
+        // Handle errors
+        console.error("Error registering user:", error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
 
 
-appe.listen(3000, () => {
-    console.log("I'm listening in port 3000");
+expressApp.listen(3000, () => {
+    console.log("Server is running on port 3000");
 });
