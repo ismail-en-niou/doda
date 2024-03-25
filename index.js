@@ -16,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const expressApp = express();
 expressApp.use(express.json());
-expressApp.post("/register", async (req, res) => {
+expressApp.get("/register", async (req, res) => {
     try {
         const { user, password } = req.body;
         const usersRef = ref(db, `/${user}`);
@@ -37,7 +37,7 @@ expressApp.post("/register", async (req, res) => {
         res.status(500).send({ message: "Internal Server Error" });
     }
 });
-expressApp.post("/login", async (req, res) => {
+expressApp.get("/login", async (req, res) => {
     try {
         const { user, password } = req.body;
         const userRef = ref(db, `/${user}`);
