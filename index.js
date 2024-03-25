@@ -2,6 +2,8 @@ const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, get, set } = require("firebase/database");
 const bcrypt = require('bcrypt');
 const express = require("express");
+const cors = require("cors");
+expressApp.use(cors());
 const firebaseConfig = {
   apiKey: "AIzaSyCrJsBOKV-pcUUGL5I5etcxd9WNDMFVTPY",
   authDomain: "my-data-base-54f9a.firebaseapp.com",
