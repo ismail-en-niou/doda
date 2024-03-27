@@ -1,5 +1,5 @@
 const { initializeApp } = require("firebase/app");
-const { getDatabase, ref, get, set } = require("firebase/database");
+const { getDatabase, ref, get, set ,push } = require("firebase/database");
 const bcrypt = require('bcrypt');
 const express = require("express");
 const cors = require("cors");

@@ -27,16 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
         taskList.appendChild(li);
 
         // Send the task data to the server
-        saveTaskToServer(taskText);
+        saveTaskToFirebase(taskText);
     }
 
-    function saveTaskToServer(todoData) {
+    function saveTaskToFirebase(todoData) {
         fetch('https://doda-o6sz.onrender.com/todos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user:authToken , task: todoData  })
+            body: JSON.stringify({ todoData: todoData, user: authToken })
         })
         .then(response => {
             if (!response.ok) {
