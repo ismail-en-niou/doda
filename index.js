@@ -65,9 +65,30 @@ expressApp.post("/login", async (req, res) => {
             });
         }
         res.status(200).send({ statut: "0", message: "Login successful" });
+       
     } catch (error) {
         console.error("Error logging in user:", error);
         res.status(500).send({ statut: "1", message: "Internal Server Error" });
+    }
+});
+expressApp.post("/todos", async (req, res) => {
+    try {
+        const { todoData, user } = req.body;
+        const userRef = ref(db, `/${user}`);
+        const userSnapshot = await get(userRef);
+        
+        if (!userSnapshot.exists()) {
+            return res.status(404).send({ status: "1", message: "User not found" });
+        }
+        
+        const userTodosRef = ref(db, `/${user}/todos`);
+        const newTodoRef = push(userTodosRef); // Create a new unique ID for the todo
+        await set(newTodoRef, todoData);
+        
+        res.status(201).send({ status: "0", message: "ToDo added successfully" });
+    } catch (error) {
+        console.error("Error adding ToDo:", error);
+        res.status(500).send({ status: "1", message: "Internal Server Error" });
     }
 });
 
