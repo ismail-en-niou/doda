@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Failed to delete task');
             }
-            console.log('Task deleted successfully');
         })
         .catch(error => {
             console.error('Error deleting task:', error);
@@ -62,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Failed to save task');
             }
-            console.log('Task saved successfully');
         })
         .catch(error => {
             console.error('Error saving task:', error);
@@ -98,8 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             taskList.innerHTML = '';
+            if (data.todos.length == 0) {
+                taskList.style.display = "none"; 
+            }else{
+                taskList.style.display = "block";
+            }
             data.todos.forEach(todo => {
-                const todoid = todo.id; 
+                const todoid = todo.id;
+               
                 function setCookie(name, value, daysTolive) {
                     const date = new Date();
                     date.setTime(date.getTime() + (daysTolive * 24 * 60 * 60 * 1000));

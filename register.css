@@ -1,0 +1,95 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #292C3A;
+
+    
+}
+
+.container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #101322;
+}
+
+h2 {
+    text-align: center;
+    padding-bottom: 15px;
+    margin-top: 0px;
+    color: #ffffff;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+  
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+input:focus {
+    outline: 1px solid #409ad6;
+}
+  
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.password-input-container {
+    position: relative;
+}
+  
+.show-password-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+  
+input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    background-color: #409ad6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #409ad6;
+}
+p{
+    color: #ffffff;
+}
+
+#errorContainer {
+    width: 100%;
+}
+
+#error {
+    text-align: center;
+    color: rgba(255, 65, 65, 0.779);
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+.return:hover , a:hover{
+  
+    color: #6689c9;
+}
