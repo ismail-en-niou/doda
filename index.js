@@ -83,7 +83,7 @@ expressApp.post("/todos", async (req, res) => {
         
         const userTodosRef = ref(db, `/${user}/todos`);
         const newTodoRef = push(userTodosRef); // Create a new unique ID for the todo
-        await set(newTodoRef, todoData);
+        await set(newTodoRef, todoData); // Save the todo data to the new unique ID
         
         res.status(201).send({ status: "0", message: "ToDo added successfully" });
     } catch (error) {
@@ -91,6 +91,7 @@ expressApp.post("/todos", async (req, res) => {
         res.status(500).send({ status: "1", message: "Internal Server Error" });
     }
 });
+
 
 expressApp.listen(3000, () => {
     console.log("Server is running on port 3000");

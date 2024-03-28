@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
         saveTaskToFirebase(taskText);
     }
 
-    function saveTaskToFirebase(todoData) {
-        fetch('https://doda-o6sz.onrender.com/todos', {
+    function saveTaskToFirebase(todoData, authToken) {
+        fetch('http://localhost:3000/todos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
