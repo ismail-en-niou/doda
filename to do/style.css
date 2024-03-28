@@ -145,7 +145,7 @@ li button{
     animation: fadeInUp 0.5s ease-out;
 }
 .container {
-    width: 60%; 
+    width: 600px; 
     box-sizing: border-box;
     padding:  2rem;
     background-color: #101322;
