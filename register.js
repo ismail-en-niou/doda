@@ -35,7 +35,6 @@ document.getElementById('submit').addEventListener('click', async function (even
         });
 
         const responseData = await response.json();
-        console.log(responseData);
         if (responseData.statut == 1) { // Changed "statut" to "status"
             error.innerHTML = `${responseData.message}`;
             document.getElementById('newUsername').value = ''; // Clear username field
