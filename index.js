@@ -1,5 +1,5 @@
 const { initializeApp } = require("firebase/app");
-const { getDatabase, ref, get, set ,push } = require("firebase/database");
+const { getDatabase, ref, get, set ,push ,remove } = require("firebase/database");
 const bcrypt = require('bcrypt');
 const express = require("express");
 const cors = require("cors");
@@ -136,7 +136,7 @@ expressApp.post("/deletetodos", async (req, res) => {
             return res.status(404).send({ status: "1", message: "Todo not found" });
         }
 
-        await remove(userTodosRef); // Remove the specific todo
+        await remove(userTodosRef); 
 
         res.status(200).send({ status: "0", message: "Todo deleted successfully" });
     } catch (error) {

@@ -13,35 +13,31 @@ document.addEventListener('DOMContentLoaded', function() {
             taskInput.value = ''; // Clear the task input field
         }
     });
-
-    // Function to add a task
     function addTask(taskText) {
-        const li = document.createElement('li'); // Create a new list item
-        li.textContent = taskText; // Set the text content of the list item
+        const li = document.createElement('li'); 
+        li.textContent = taskText; 
         li.addEventListener('click', function() {
-            li.classList.toggle('completed'); // Toggle 'completed' class on click
+            li.classList.toggle('completed'); 
         });
-        const deleteButton = document.createElement('button'); // Create a delete button
-        deleteButton.textContent = 'Delete'; // Set the delete button text
+        const deleteButton = document.createElement('button'); 
+        deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', function() {
-            // When delete button is clicked, call deleteTaskToFirebase function
+    
             deleteTaskToFirebase(authToken, todoid);
         });
-        li.appendChild(deleteButton); // Append delete button to the list item
-        taskList.appendChild(li); // Append the list item to the task list
-
-        // Send the task data to the server
-        saveTaskToFirebase(taskText, authToken); // Pass authToken to saveTaskToFirebase
+        li.appendChild(deleteButton); 
+        taskList.appendChild(li);
+        saveTaskToFirebase(taskText, authToken); 
     }
 
-    // Function to delete a task from Firebase
+
     function deleteTaskToFirebase(authToken, todoid) {
         fetch('https://doda-o6sz.onrender.com/deletetodos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user: authToken, todoId: todoid }) // Pass todoId instead of todoid
+            body: JSON.stringify({ user: authToken, todoId: todoid }) 
         })
         .then(response => {
             if (!response.ok) {
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to save a task to Firebase
     function saveTaskToFirebase(todoData, authToken) {
         fetch('https://doda-o6sz.onrender.com/todos', {
             method: 'POST',
@@ -74,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to get cookie value by name
+  
     function getCookie(name) {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
@@ -85,12 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return null;
     }
-
-    // Get authToken and todoid from cookies
     const todoid = getCookie("todoid");
     const authToken = getCookie('userid');
-
-    // Function to fetch todos data from the server
     function fetchData() {
         fetch('https://doda-o6sz.onrender.com/showtodos', {
             method: 'POST',
