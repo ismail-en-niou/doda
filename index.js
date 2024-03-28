@@ -119,7 +119,31 @@ expressApp.post("/showtodos", async (req, res) => {
     }
 });
 
+expressApp.post("/deletetodos", async (req, res) => {
+    try {
+        const { user, todoId } = req.body; // Add todoId to request body
+        const userRef = ref(db, `/${user}`);
+        const userSnapshot = await get(userRef);
 
+        if (!userSnapshot.exists()) {
+            return res.status(404).send({ status: "1", message: "User not found" });
+        }
+
+        const userTodosRef = ref(db, `/${user}/todos/${todoId}`); // Reference to the specific todo
+        const todoSnapshot = await get(userTodosRef);
+
+        if (!todoSnapshot.exists()) {
+            return res.status(404).send({ status: "1", message: "Todo not found" });
+        }
+
+        await remove(userTodosRef); // Remove the specific todo
+
+        res.status(200).send({ status: "0", message: "Todo deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting Todo:", error);
+        res.status(500).send({ status: "1", message: "Internal Server Error" });
+    }
+});
 expressApp.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
