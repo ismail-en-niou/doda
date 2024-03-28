@@ -62,3 +62,31 @@ function getCookie(name) {
 }
 
 const authToken = getCookie('userid');
+function fetchData() {
+    fetch('https://doda-o6sz.onrender.com/showtodos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: 'username' }) // Replace 'username' with the actual username
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch todos');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Handle the received todos data
+        console.log('Todos:', data.todos);
+    })
+    .catch(error => {
+        console.error('Error fetching todos:', error);
+    });
+}
+
+// Fetch data initially when the page loads
+fetchData();
+
+// Fetch data every 30 seconds
+setInterval(fetchData, 30000);

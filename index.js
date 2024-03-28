@@ -91,6 +91,33 @@ expressApp.post("/todos", async (req, res) => {
         res.status(500).send({ status: "1", message: "Internal Server Error" });
     }
 });
+expressApp.post("/showtodos", async (req, res) => {
+    try {
+        const { user } = req.body;
+        const userRef = ref(db, `/${user}`);
+        const userSnapshot = await get(userRef);
+        
+        if (!userSnapshot.exists()) {
+            return res.status(404).send({ status: "1", message: "User not found" });
+        }
+        
+        const userTodosRef = ref(db, `/${user}/todos`);
+        const userTodosSnapshot = await get(userTodosRef);
+
+        const todos = [];
+        userTodosSnapshot.forEach((childSnapshot) => {
+            todos.push({
+                id: childSnapshot.key,
+                data: childSnapshot.val()
+            });
+        });
+
+        res.status(200).send({ status: "0", message: "Todos retrieved successfully", todos: todos });
+    } catch (error) {
+        console.error("Error retrieving Todos:", error);
+        res.status(500).send({ status: "1", message: "Internal Server Error" });
+    }
+});
 
 
 expressApp.listen(3000, () => {
