@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function saveTaskToFirebase(todoData, authToken) {
-        fetch('http://localhost:3000/todos', {
+        fetch('https://doda-o6sz.onrender.com/todos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ function fetchData() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user: 'username' }) // Replace 'username' with the actual username
+        body: JSON.stringify({ user: authToken }) // Replace 'username' with the actual username
     })
     .then(response => {
         if (!response.ok) {
@@ -89,4 +89,4 @@ function fetchData() {
 fetchData();
 
 // Fetch data every 30 seconds
-setInterval(fetchData, 30000);
+setInterval(fetchData, 10000);
