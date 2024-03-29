@@ -45,6 +45,8 @@ expressApp.post("/register", async (req, res) => {
     }
 });
 
+
+
 expressApp.post("/login", async (req, res) => {
     try {
         const { user, password } = req.body;
@@ -71,6 +73,8 @@ expressApp.post("/login", async (req, res) => {
         res.status(500).send({ statut: "1", message: "Internal Server Error" });
     }
 });
+
+
 expressApp.post("/todos", async (req, res) => {
     try {
         const { todoData, user } = req.body;
@@ -91,6 +95,8 @@ expressApp.post("/todos", async (req, res) => {
         res.status(500).send({ status: "1", message: "Internal Server Error" });
     }
 });
+
+
 expressApp.post("/showtodos", async (req, res) => {
     try {
         const { user } = req.body;
@@ -119,6 +125,7 @@ expressApp.post("/showtodos", async (req, res) => {
     }
 });
 
+
 expressApp.post("/deletetodos", async (req, res) => {
     try {
         const { user, todoId } = req.body; // Add todoId to request body
@@ -144,6 +151,8 @@ expressApp.post("/deletetodos", async (req, res) => {
         res.status(500).send({ status: "1", message: "Internal Server Error" });
     }
 });
+
+
 expressApp.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
